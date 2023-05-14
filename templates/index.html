@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Gauntlet - Feed{% endblock %}
+{% block content %}
+{% for post in posts %}
+<section class="post">
+    <h2 class="post-title"><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+    <div class="post-info">
+        <span class="author">Posted by {{ post.author }}</span>
+        <span class="date">{{ post.published_at }}</span>
+    </div>
+    <p> {{ post.content}} </p>
+    <div class="post-stats">
+        <span class="upvotes">{{ post.upvotes }} Upvotes</span>
+        <span class="comments">💬 {{ post.comment_count }} Comments</span>
+    </div>
+</section>
+{% endfor %}
+{% endblock %}

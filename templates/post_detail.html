@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Gauntlet - {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <section class="post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <div class="post-info">
+            <span class="author">Posted by {{ post.author }}</span>
+            <span class="date">{{ post.published_at }}</span>
+        </div>
+        <p>
+            {{ post.content }}
+        </p>
+        <div class="post-stats">
+            <span class="upvotes">{{ post.upvotes }} Upvotes</span>
+            <span class="comments">&#x1F4AC; {{ post.comment_count }} Comments</span>
+        </div>
+    </section>
+
+    <section class="comments">
+        <h3>Comments</h3>
+        {% for comment in post.comments.all %}
+            {% with comment=comment %}{% include 'comment.html' %}{% endwith %}
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Gauntlet - {{ user.username }}'s Profile
+{% endblock %}
+
+{% block content %}
+    <section class="profile">
+        <h1>{{ user.username }}'s Profile</h1>
+        <img class="profile-pic" src="{{ user.profile_pic.url }}" alt="Profile Picture">
+        <h2>Posts</h2>
+        {% for post in user.posts %}
+            <section class="post">
+                <h2 class="post-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+                <div class="post-info">
+                    <span class="date">{{ post.published_at }}</span>
+                </div>
+            </section>
+        {% endfor %}
+        <h2>Comments</h2>
+        {% for comment in user.comments %}
+            {% include 'comment.html' with comment=comment %}
+        {% endfor %}
+    </section>
+{% endblock %}
